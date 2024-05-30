@@ -1,5 +1,5 @@
 /*
-  sort လုပ်တဲ့ အခါမှာ ဒီတိုင်းရိုးရိုးလည်းရတယ်။
+  sort လုပ်တဲ့ အခါမှာ ဒီတိုင်းရိုးရိုးလည်းရတယ်။ 
   အထဲမှာ function တွေထည့်ပြီးလုပ်လည်းရတယ်။
   
   eg. const numbers = [1,4,2,3,4,3,121,24]
@@ -37,7 +37,13 @@ const containerTag = document.querySelector(".container");
 const sortTags = document.querySelectorAll(".dropdown-item");
 sortTags.forEach((element) => {
   element.addEventListener("click", (event) => {
-   console.log(event.target.id);
+  if(event.target.id="ascending"){
+    const vediosSortedByAscendingOrder = vedios.sort((a,b)=>a.loacleCompare(b));
+    updateSort(vediosSortedByAscendingOrder);
+  }else{
+    const vediosSortedByDecendingOrder = vedios.sort((a,b)=>b.loacleCompare(a));
+    updateSort(vediosSortedByDecendingOrder);
+  };
   });
 });
 
@@ -64,13 +70,17 @@ const videos = [
   },
 ];
 
-  videos.forEach((video) => {
-    const videoTag = `
-    <div class="videoContainer">
-      <img src="${video.thumbnail}" class="img"/>
-      <h6>${video.title}</h6>
-      <p>${video.uploadDate}</p>
-    </div>
-  `;
-    containerTag.innerHTML += videoTag;
-  });
+  const updateSort = (vedios)=>{
+    videos.forEach((video) => {
+      const videoTag = `
+      <div class="videoContainer">
+        <img src="${video.thumbnail}" class="img"/>
+        <h6>${video.title}</h6>
+        <p>${video.uploadDate}</p>
+      </div>
+    `;
+      containerTag.innerHTML += videoTag;
+    });  
+  }
+
+  updateSort(videos);
