@@ -1,5 +1,5 @@
 /*
-  sort လုပ်တဲ့ အခါမှာ ဒီတိုင်းရိုးရိုးလည်းရတယ်။ 
+  sort လုပ်တဲ့ အခါမှာ ဒီတိုင်းရိုးရိုးလည်းရတယ်။  
   အထဲမှာ function တွေထည့်ပြီးလုပ်လည်းရတယ်။
   
   eg. const numbers = [1,4,2,3,4,3,121,24]
@@ -37,12 +37,16 @@ const containerTag = document.querySelector(".container");
 const sortTags = document.querySelectorAll(".dropdown-item");
 sortTags.forEach((element) => {
   element.addEventListener("click", (event) => {
-  if(event.target.id="ascending"){
-    const vediosSortedByAscendingOrder = vedios.sort((a,b)=>a.loacleCompare(b));
-    updateSort(vediosSortedByAscendingOrder);
+  if(event.target.id === "ascending"){
+    const videosSortedByAscendingOrder = videos.sort(
+      (a,b) => a.uploadDate.getTime() - b.uploadDate.getTime()
+    );
+    updateSort(videosSortedByAscendingOrder);
   }else{
-    const vediosSortedByDecendingOrder = vedios.sort((a,b)=>b.loacleCompare(a));
-    updateSort(vediosSortedByDecendingOrder);
+    const videosSortedByDecendingOrder = videos.sort(
+      (a,b) => b.uploadDate.getTime() - a.uploadDate.getTime()
+    );
+    updateSort(videosSortedByDecendingOrder);
   };
   });
 });
@@ -71,12 +75,13 @@ const videos = [
 ];
 
   const updateSort = (vedios)=>{
+    containerTag.innerHTML = "";
     videos.forEach((video) => {
       const videoTag = `
       <div class="videoContainer">
         <img src="${video.thumbnail}" class="img"/>
         <h6>${video.title}</h6>
-        <p>${video.uploadDate}</p>
+        <p>${video.uploadDate.toLocaleDateString()}</p>
       </div>
     `;
       containerTag.innerHTML += videoTag;
